@@ -1,22 +1,21 @@
-import React,{useEffect, useState} from 'react'
+import React,{useState} from 'react'
+import Header from './header';
 
-function index() {
+function Layout({children}: {
+  children: React.ReactNode
+}) {
 
   const[message, setMessage] = useState("Loading");
 
-  // useEffect(() => {
-  //   fetch("http://localhost:8081/api/home").then(
-  //     res => res.json()
-  //   ).then(
-  //     data => {
-  //       setMessage(data.message);
-  //     }
-  //   )
-  // },[])
-
   return (
-    <div>Hello</div>
+    <section>
+      <Header />
+      <div className='s-main'>
+        {children}
+      </div>
+    </section>
+    
   )
 }
 
-export default index
+export default Layout

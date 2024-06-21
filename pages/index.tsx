@@ -1,9 +1,15 @@
-import React,{useState} from 'react'
+import { useRouter } from 'next/router';
+import React,{useEffect, useState} from 'react'
 import Header from './header';
 
 function Layout({children}: {
   children: React.ReactNode
 }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/home');
+  }, [router]);
 
   return (
     <section>

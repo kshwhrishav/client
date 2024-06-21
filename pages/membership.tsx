@@ -1,9 +1,9 @@
 import React from 'react'
 
-function membership() {
+function Membership() {
   return (
     <div>membership</div>
   )
 }
 
-export default membership
+export default Membership

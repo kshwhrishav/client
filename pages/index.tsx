@@ -5,15 +5,13 @@ function Layout({children}: {
   children: React.ReactNode
 }) {
 
-  const[message, setMessage] = useState("Loading");
-
   return (
     <section>
       <Header />
       <div className='s-main'>
         {children}
       </div>
-    </section>
+    </section>  
     
   )
 }

@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+
+// colors
+$primary-color: #36ebb7;
+$secondary-color: #36e1eb;
+$text-color: #36eb7a;
+$background-color: #326cea;
+$secondary-text-color: #84e5eb;
+$background-black: #000000;
+$background-white: #ffffff;
+
+
+.body{
+    font-family: "Lora", serif;
+}
+
+// button
+
+.primary-button {
+  background-color: $primary-color;
+  color: $background-white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+.s-main {
+    font-family: "Lora", serif;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    // background-color: $primary-color; // Use SCSS variables directly
+}
+

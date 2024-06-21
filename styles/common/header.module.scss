@@ -1,0 +1,44 @@
+@import '../global.scss'; // Import your global SCSS file
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+.font{
+    font-family: "Lora", serif;
+}
+
+.headerContainer {
+    padding: 20px;
+    background-color: #d5d8dd; // Use SCSS variables directly
+
+    .headerSection{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .logoContainer{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+    
+            .logo{
+                cursor: pointer;
+                width: 6rem;
+            }
+        }
+
+        .headerLinks{
+            display: flex;
+            font-size: large;
+            gap: 1rem;
+            font-family: "Lora", serif;
+
+            .links{
+                &:hover {
+                    color: darken($primary-color, 10%);
+                  }
+            }
+        }
+    }
+
+    
+    
+}

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React,{useEffect, useState} from 'react'
-import Header from './header';
+import Footer from './components/footer';
+import Header from './components/header';
 
 function Layout({children}: {
   children: React.ReactNode
@@ -8,8 +9,10 @@ function Layout({children}: {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('/home');
-  }, [router]);
+    if (router.pathname === '/') {
+      router.push('/home');
+    }
+  }, [router.pathname]);
 
   return (
     <section>
@@ -17,6 +20,7 @@ function Layout({children}: {
       <div className='s-main'>
         {children}
       </div>
+      <Footer />
     </section>  
     
   )

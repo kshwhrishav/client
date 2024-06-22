@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import styles from "../styles/common/header.module.scss";
+import styles from "../../styles/common/header.module.scss";
 import { useRouter } from "next/router";
 import { Typography } from "@mui/material";
 import Link from "next/link";

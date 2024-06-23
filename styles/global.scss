@@ -19,7 +19,7 @@ $background-white: #ffffff;
 
 .primary-button {
   background-color: $primary-color;
-  color: $background-white;
+  color: $background-black;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -32,8 +32,12 @@ $background-white: #ffffff;
 
 .s-main {
     font-family: "Lora", serif;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+    display: flex;
+    justify-content: center;
     // background-color: $primary-color; // Use SCSS variables directly
 }
 
+.main{
+  display: flex;
+  flex-direction: column;
+}

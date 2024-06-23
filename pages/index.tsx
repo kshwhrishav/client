@@ -15,12 +15,14 @@ function Layout({children}: {
   }, [router.pathname]);
 
   return (
-    <section>
+    <section className='main'>
       <Header />
       <div className='s-main'>
         {children}
       </div>
-      <Footer />
+      <div>
+        <Footer />
+      </div>
     </section>  
     
   )

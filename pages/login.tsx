@@ -2,6 +2,7 @@ import { Button } from "@mui/base";
 import { OutlinedInput, Typography } from "@mui/material";
 import React, { ChangeEvent, MouseEvent, useState } from "react";
 import styles from "../styles/login.module.scss";
+import { useAuth } from '../hooks/useAuth';
 
 interface LoginFormState {
   username: string;
@@ -13,6 +14,8 @@ const Login: React.FC = () => {
     username: "",
     password: "",
   });
+
+  const {login} = useAuth();
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -27,21 +30,7 @@ const Login: React.FC = () => {
   const handleSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:3002/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formState),
-      });
-
-      if (!response.ok) {
-        throw new Error('Login failed');
-      }
-
-      const data = await response.json();
-      console.log('Login successful:', data);
-      // Handle successful login, e.g., store token, redirect, etc.
+      await login(formState.username, formState.password);
     } catch (error) {
       setErrorMessage('Invalid username or password');
       console.error('Error:', error);
@@ -64,6 +53,7 @@ const Login: React.FC = () => {
               value={formState.username}
               onChange={handleInputChange}
               type="text"
+              sx={{backgroundColor:'white'}}
               required
             />
           </div>
@@ -76,6 +66,7 @@ const Login: React.FC = () => {
               onChange={handleInputChange}
               type="password"
               required
+              sx={{backgroundColor:'white'}}
             />
           </div>
 

@@ -1,15 +1,31 @@
+// MyApp.tsx
 import "@/styles/globals.css";
 import "../styles/global.scss";
-import type { AppProps } from "next/app";
+import type { AppProps } from 'next/app';
 import Layout from "./index";
-import { AuthProvider } from "@/context/AuthContext";
+import { AuthProvider } from "../context/AuthContext";
+import { NextPageWithAuth } from '../type/types';
 
-export default function App({ Component, pageProps }: AppProps) {
+type AppPropsWithAuth = AppProps & {
+  Component: NextPageWithAuth;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithAuth) {
+  const requireAuth = Component.requireAuth ?? false;
+  console.log('requireAuth in MyApp:', requireAuth); // Ensure this logs the expected value
+
   return (
     <AuthProvider>
-      <Layout>
+      {requireAuth !== undefined && console.log('requireAuth in AuthProvider:', requireAuth)}
+      {requireAuth ? (
         <Component {...pageProps} />
-      </Layout>
+      ) : (
+        <Layout requireAuth={requireAuth}>
+          <Component {...pageProps} />
+        </Layout>
+      )}
     </AuthProvider>
   );
 }
+
+export default MyApp;

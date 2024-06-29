@@ -1,31 +1,37 @@
 import { useRouter } from 'next/router';
-import React,{useEffect, useState} from 'react'
+import { useAuth } from '../context/AuthContext';
+import { useEffect, ReactNode } from 'react';
 import Footer from './components/footer';
 import Header from './components/header';
 
-function Layout({children}: {
-  children: React.ReactNode
-}) {
+interface LayoutProps {
+  children: ReactNode;
+  requireAuth?: boolean;
+}
+
+function Layout({ children, requireAuth = false }: LayoutProps) {
+  const { user, loading }: any = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (router.pathname === '/') {
-      router.push('/home');
+    if (!loading && requireAuth && !user) {
+      router.push('/login');
     }
-  }, [router.pathname]);
+  }, [loading, requireAuth, user]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <section className='main'>
+    <section>
       <Header />
       <div className='s-main'>
         {children}
       </div>
-      <div>
-        <Footer />
-      </div>
-    </section>  
-    
-  )
+      <Footer />
+    </section>
+  );
 }
 
-export default Layout
+export default Layout;

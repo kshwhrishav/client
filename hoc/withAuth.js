@@ -1,5 +1,3 @@
-// hocs/withAuth.tsx
-
 import { useAuth } from '../context/AuthContext';
 import { useEffect } from 'react';
 import Router from 'next/router';
@@ -12,14 +10,17 @@ const withAuth = (WrappedComponent) => {
       if (!loading && !user) {
         Router.push('/login');
       }
-    }, [loading, user]);
+    }, [user]);
 
     if (loading) {
-      return <p>Loading...</p>; // You can show a loading spinner or any other loading indicator
+      return <p>Loading...</p>;
     }
 
     return <WrappedComponent {...props} />;
   };
+
+  // Attach requireAuth to Wrapper component
+  Wrapper.requireAuth = WrappedComponent.requireAuth;
 
   return Wrapper;
 };

@@ -12,4 +12,6 @@ function Dashboard() {
   )
 }
 
+Dashboard.requireAuth = true;
+
 export default withAuth(Dashboard)

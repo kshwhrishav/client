@@ -1,35 +1,44 @@
+// AuthContext.tsx
 import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Router from 'next/router';
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  console.log("auth", children.requireAuth)
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      axios.post('http://localhost:3002/api/validate-token', { token })
-        .then(response => {
-          setUser(response.data.user);
-          setLoading(false);
-        })
-        .catch(() => {
-          localStorage.removeItem('token');
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
+    const validateToken = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (token) {
+          const response = await axios.post('http://localhost:3002/api/validate-token');
+          const { user } = response.data;
+          setUser(user);
+        }
+      } catch (error) {
+        console.error('Error validating token:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    validateToken();
   }, []);
 
   const login = async (username, password) => {
-    const response = await axios.post('/api/login', { username, password });
-    localStorage.setItem('token', response.data.token);
-    setUser(response.data.user);
-    Router.push('/dashboard');
+    try {
+      const response = await axios.post('http://localhost:3002/api/login', { username, password });
+      const { token, user } = response.data;
+      localStorage.setItem('token', token);
+      setUser(user);
+      Router.push('/dashboard');
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
   };
 
   const logout = () => {
